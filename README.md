@@ -1,0 +1,9 @@
+# Multi-step-form
+challange to make multiple step form, That first I thought, it was easy but it  turns out I was wrong. As always never judge abook buy its cover...
+# React + Vite
+This my second project that I used React and I find Vite quite useful.
+ I used useState, context API( I hated context API, but not anymore)...
+the text input accept only string and email also and the phone input Number.
+there are two button that controle the form.
+I made them be hidden when the conditions are not met...
+
