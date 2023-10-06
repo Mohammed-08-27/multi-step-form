@@ -22,7 +22,7 @@ const FormContextProvider = ({ children }) => {
       }
       setTotal(Number(planPrice) + addonPrice)
     } if (isNaN(name) && email && !isNaN(phone)) {
-      setStepCount(stepCount + 1)
+      setStepCount(stepCount + 1);
       setInputError(false)
     } else {
       setInputError(true)
@@ -56,7 +56,6 @@ const FormContextProvider = ({ children }) => {
     const el = e.currentTarget;
     const addons = el.children[1].children[0].textContent;
     const addonNum = el.children[2].textContent.split('').filter(item => !isNaN(item)).join('');
-
     if (!el.classList.contains('active')) {
       el.classList.add('active');
       setSelectedAddons(selectedAddons.concat(addons))
@@ -70,7 +69,6 @@ const FormContextProvider = ({ children }) => {
       console.log(addonPrice)
     }
   }
-
   function Checked(e) {
     e.preventDefault();
     if (plan === 'Mon') {
@@ -79,9 +77,33 @@ const FormContextProvider = ({ children }) => {
       return setPlan('Mon');
     }
   }
+  function outlineFun(element, condition) {
+    if (condition) {
+      element.style.outline = '1px solid hsl(354, 84%, 57%)'
+      setInputError(true)
+    } else {
+      element.style.outline = '.5px solid hsl(243, 100%, 62%)'
+      setInputError(false)
+    }
+  }
+  const handleErr = (e) => {
+    const el = e.target
+    const valueInput = el.value
+    const elId = el.getAttribute('id');
+    if (elId === 'name') {
+      setName(valueInput)
+      outlineFun(el, Number(valueInput))
+    } else if (elId === 'email') {
+      setEmail(valueInput)
+      outlineFun(el, !valueInput.includes("@"))
+    } else {
+      setPhone(valueInput)
+      outlineFun(el, !Number(valueInput))
+    }
 
+  }
   return (
-    <FormContext.Provider value={{ name, setName, stepCount, nextFun, prevFun, phone, setPhone, email, setEmail, thankFun, activeFun, plan, setPlan, dataPrice, activeToggle, selectedPlan, planPrice, selectedAddons, Checked, total, setStepCount, inputError }}>
+    <FormContext.Provider value={{ name, stepCount, nextFun, prevFun, phone, email, thankFun, activeFun, plan, setPlan, dataPrice, activeToggle, selectedPlan, planPrice, selectedAddons, Checked, total, setStepCount, inputError, handleErr, outlineFun }}>
       {children}
     </FormContext.Provider>
   )

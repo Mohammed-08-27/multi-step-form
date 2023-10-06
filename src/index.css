@@ -536,6 +536,6 @@ body {
   display: none;
 }
 
-input.error {
-  outline: 1px solid var(--clr-Strawberry-red);
+.error {
+  outline: 2px solid var(--clr-Strawberry-red);
 }
